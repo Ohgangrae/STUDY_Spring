@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>게시글 상세보기</title>
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <style>
+        body {transform: scale(0.8);}
+    </style>
+</head>
+<body>
+    <!-- Main -->
+    <div id="main">
+        <div class="wrapper">
+            <div class="inner">
+
+                <!-- Elements -->
+                <header class="major">
+                    <h1>Board</h1>
+                    <p>게시글 상세보기</p>
+                </header>
+                <!-- Table -->
+                <h3><a id="goList" class="button small">목록 보기</a></h3>
+                <div class="content">
+                    <div class="form">
+                        <form method="post" action="/board/remove" th:object="${board}">
+                            <div class="fields">
+                                <div class="field">
+                                    <h4>번호</h4>
+                                    <input type="text" readonly th:field="*{boardBno}"/>
+                                </div>
+                                <div class="field">
+                                    <h4>제목</h4>
+                                    <input type="text" readonly th:field="*{boardTitle}"/>
+                                </div>
+                                <div class="field">
+                                    <h4>내용</h4>
+                                    <textarea rows="6" style="resize:none" readonly th:field="*{boardContent}"></textarea>
+                                </div>
+                                <div class="field">
+                                    <h4>작성자</h4>
+                                    <input type="text" readonly th:field="*{boardWriter}"/>
+                                </div>
+                            </div>
+                            <ul class="actions special">
+                                <li>
+                                    <input type="button" class="button" value="수정" onclick="goUpdate()"/>
+                                    <input type="submit" class="button" value="삭제"/>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<!-- Scripts -->
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/jquery.dropotron.min.js"></script>
+<script src="/assets/js/browser.min.js"></script>
+<script src="/assets/js/breakpoints.min.js"></script>
+<script src="/assets/js/util.js"></script>
+<script src="/assets/js/main.js"></script>
+<script src="/assets/js/reply.js"></script>
+<script th:inline="javascript">
+    let boardBno = [[${board.boardBno}]];
+    let paging = [[${criteria.listLink}]];
+    console.log(paging);
+
+    function goUpdate(){
+        location.href = '/board/modify' + paging + '&boardBno=' + boardBno;
+    }
+
+    $("a#goList").click(function(e){
+        e.preventDefault();
+        location.href = "/board/list" + paging;
+    });
+
+    $(document).ready(function () { // 완성되고 나서 마지막에 하겠다 라는 뜻
+        console.log(replyService);
+        replyService.add(function (result) { // 여기로 콜백함수가 다시 온다.
+        })
+    });
+
+    replyService.add({
+        replyContent: "오강래 테스트",
+        replyWriter: "3:40 지금",
+        boardBno: boardBno
+    }, function(result){
+        alert(result);
+    }, function(a, b, c){console.log(a, b, c)});
+
+    //댓글 한 개 정보 가져오기
+    //                  rno
+    // replyService.get(3, function(reply){
+    //     console.log(reply);
+    // });
+
+    // 삭제              rno
+    // replyService.remove(31, function(result){
+    //     alert(result);
+    // });
+
+    // 수정             rno
+    replyService.modify(
+
+        3,
+
+        function(result){
+        alert(result);
+        console.log("modify.........3:58"+result);
+        }
+
+    );
+
+    // replyService.add({
+    //     replyContent: "성공 Test",
+    //     replyWriter: "1125",
+    // }, function(result){
+    //     alert(result);
+    // }, function(a, b, c){console.log(a, b, c)});
+
+
+    // replyService.getlist({bno: boardBno,page: 2}, function(list){
+    //     console.log(list);
+    // });
+
+    // replyService.hi(,function()){
+    //
+    // }, function (result) {
+    //     alert(result);
+    // }
+
+
+
+
+
+
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

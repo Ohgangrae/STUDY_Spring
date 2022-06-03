@@ -1,0 +1,88 @@
+검색 처리
+	- 단일 항목 검색
+		제목/내용/작성자
+
+	- 다중 항목 검색
+		제목 또는 내용, 제목 또는 작성자, 내용 또는 작성자, 제목 또는 내용 또는 작성자
+-------------------------------------------------------------------------------------
+MyBatis 동적 태그들
+	if
+	choose(when, otherwise)
+	where
+	trim
+	foreach
+
+[if]
+	- 검색 조건이 'T' : 제목이 키워드인 항목을 검색
+		<if test="type == 'T'.toString()">
+			(title like '%'||#{keyword}||'%')
+		</if>
+
+[choose]
+	<choose>
+		<when test="type == 'T'.toString()">
+			(title like '%'||#{keyword}||'%')
+		</when>
+		<when test="type == 'C'.toString()">
+			(content like '%'||#{keyword}||'%')
+		</when>
+		<otherwise>
+			(writer like '%'||#{keyword}||'%')
+		</otherwise>
+	</choose>
+
+[where]
+	select * from tbl_board
+	<where>
+		<if test="bno != null">
+			bno = #{bno}
+		</if>
+	</where>
+
+[trim]
+	select * from tbl_board
+	<where>
+		<if test="bno != null">
+			bno = #{bno}
+		</if>
+		<trim prefixOverrides = "and">
+			rownum = 1
+		</trim>
+	</where>
+
+[foreach]
+	List, 배열, Map 등을 이용해서 반복을 처리한다.
+
+	*파라미터
+	Map<String, String> map = new HashMap<>();
+	
+	map.put("T", "제목");
+	map.put("C", "내용");
+
+
+	select * from tbl_board
+	<trim prefix="where(" prefixOverrides="or" suffix=")">
+	<foreach item="val" index="key" collection="map">
+		<trim prefix="or">
+			<if test="key == 'T'.toString()">
+				title = #{val}
+			</if>
+			<if test="key == 'C'.toString()">
+				content = #{val}
+			</if>
+		</trim>
+	</foreach>
+	</trim>
+
+
+
+
+
+
+
+
+
+
+
+
+
