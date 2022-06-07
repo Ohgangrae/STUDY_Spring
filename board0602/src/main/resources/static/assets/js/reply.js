@@ -39,89 +39,131 @@ let replyService = (function(){
         });
     }
 
-    //댓글 한 개 정보 가져오기
-    // function get(rno, callback, error){
-    //     $.ajax({
-    //         url: "/reply/" + rno,
-    //         type: "get",
-    //         dataType: "json",
-    //         success: function(reply){
-    //             if(callback){
-    //                 callback(reply);
-    //             }
-    //         }
-    //     })
-    // }
+    // 댓글 한 개 정보 가져오기
+    function get(rno, callback, error){
+        $.ajax({
+            url: "/reply/" + rno,
+            type: "get",
+            dataType: "json",
+            success: function(reply){
+                if(callback){
+                    callback(reply);
+                }
+            }
+        })
+    }
 
     //댓글 삭제
-    // function remove(rno, callback, error){
-    //     $.ajax({
-    //         url: "/reply/" + rno,
-    //         type: "delete",
-    //         success: function(result){
-    //             if(callback){
-    //                 callback(result);
-    //             }
-    //         }
-    //     });
-    // }
+    function remove(rno, callback, error){
+        $.ajax({
+            url: "/reply/" + rno,
+            type: "delete",
+            success: function(result){
+                if(callback){
+                    callback(result);
+                }
+            }
+        });
+    }
 
     //댓글 수정
-    // function modify(rno ,callback, error){
-    //     $.ajax({
-    //        url: "/reply/" + rno,
-    //        type: "patch", //ReplyController에 수정부분이 @PatchMapping이기 때문에
-    //         data: JSON.stringify(reply),//JSON.stringify() 이 메서드는 js값이나 객체를 json 문자열로 변환한다.
-    //         contentType: "application/json",
-    //
-    //         success: function(result){
-    //             if(callback){
-    //                 callback(result);
-    //             }
-    //         }
-    //
-    //     });
-    // }
+    function modify(reply ,callback, error){
+        $.ajax({
+           url: "/reply/" + reply.rno,
+           type: "patch", //ReplyController에 수정부분이 @PatchMapping이기 때문에
+            data: JSON.stringify(reply),//JSON.stringify() 이 메서드는 js값이나 객체를 json 문자열로 변환한다.
+            contentType: "application/json; charset=utf-8;",
+
+            success: function(result){
+                if(callback){
+                    callback(result);
+                }
+            }
+
+        });
+    }
 
 
     // 댓글 목록
-    // function getList(rno,reply, callback, error) {//뭘받을지는 컨트롤러 가서 확인
-    //     $.ajax({
-    //         url:"/reply/list/" + bno + "/" + page,
-    //         type:"get", //get방식이고
-    //         dataType: "json",
-    //         success: function(list){
-    //             if(callback){
-    //                 callback(list);
-    //             }
-    //         }
-    //     });
-    // }
+
+    function getList(param, callback, error) {
+        let page = param.page || 1;
+        $.getJSON("/reply/list/" + param.bno + "/" + page, function (replyPageDTO) {
+            if (callback) {
+                callback(replyPageDTO.total, replyPageDTO.list);
+            }
+        }).fail(function (xhr, status, er) {
+            if (error) {
+                error(er);
+            }
+        });
+// 댓글 목록
+//         function getList(param, callback, error) {   //뭘받을지는 컨트롤러 가서 확인
+//         let page = param.page || 1;
+//         $.ajax({
+//             url:"/reply/list/" + param.bno + "/" + page,
+//             type:"get", //get방식이고
+//             dataType: "json",//왜? json?  controller에 리턴타입이 List<ReplyVO>(객체) 때문에
+//             success: function(list){
+//                 if(callback){
+//                     callback(list);
+//                 }
+//             },
+//             error: function(xhr, status, er){//요청 실패시
+//                 if(error){
+//                     error(xhr, status, er);
+//                 }
+//             }
+//         });
+//     }
 
 
-    // 1번 매개변수 없고 리턴은 문자열
+        // 1번 매개변수 없고 리턴은 문자열
 
-    // function hi() {
-    //     $.ajax({
-    //         url:"/reply/" + ,
-    //         type:"get",//전송방식
-    //         dataType: "text",
-    //         success: function (list) {//성공시
-    //             if(callback){
-    //                 callback(list);
-    //             }
-    //         }
-    //     })
-    //
-    // }
+        // function hi() {
+        //     $.ajax({
+        //         url:"/reply/" + ,
+        //         type:"get",//전송방식
+        //         dataType: "text",
+        //         success: function (list) {//성공시
+        //             if(callback){
+        //                 callback(list);
+        //             }
+        //         }
+        //     })
+        //
+        // }
 
 
-
-    return {add: add, get: get};
+//     return {getList: getList};
+// })();
 
 //     return {add: add, get: get, remove: remove, modify: modify};
 // })();
 
 
-//     return {add: add, get: get, remove: remove, modify: modify};//, getlist: getlist
-// })();
+        //댓글 작성 시간(Javascript)
+        function getReplyDateByJavascript(replyDate) {
+            let today = new Date();
+            let rDate = new Date(replyDate);
+            let gap = today.getTime() - rDate.getTime();
+
+            if(gap < 1000 * 60 * 60 * 24){
+                let h = rDate.getHours();
+                let m = rDate.getMinutes();
+                let s = rDate.getSeconds();
+
+                return [(h < 10 ? '0' : '') + h, (h < 10 ? '0' : '') + m, (h < 10 ? '0' : '') + s].join(":");
+            }else{
+                let y = rDate.getFullYear();
+                let m = rDate.getMonth();
+                let d = rDate.getDate();
+
+                return  [y, (m < 10 ? '0' : '') + m, (d < 10 ? '0' : '') + d]
+            }
+
+        }
+    }
+
+    return {add: add, get: get, remove: remove, modify: modify, getList: getList, getReplyDateByJavascript: getReplyDateByJavascript};
+})();

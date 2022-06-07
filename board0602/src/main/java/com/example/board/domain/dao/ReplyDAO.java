@@ -48,6 +48,10 @@ public class ReplyDAO {
         return replyMapper.getList(criteria, boardBno);
     }
 
+    //    댓글 개수
+    public int getTotal(Long boardBno){
+        return replyMapper.getTotal(boardBno);
+    }
 }
 
 
