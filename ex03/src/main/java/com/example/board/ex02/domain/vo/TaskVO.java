@@ -11,11 +11,11 @@ public class TaskVO {
     private int eng;
     private int math;
 
-    public int getTotal(){
+    public int getTotal() {
         return kor + eng + math;
     }
 
-    public double getAvg(){
+    public double getAvg() {
         return getTotal() / 3.0;
     }
 }

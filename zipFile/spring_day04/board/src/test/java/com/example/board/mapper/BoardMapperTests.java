@@ -42,10 +42,13 @@ public class BoardMapperTests {
 //    }
 
     @Test
-    public void updateTest(){
+    public void updateTest() {
         Long boardBno = 10L;
         BoardVO boardVO = boardMapper.get(boardBno);
-        if(boardVO == null) { log.info("NO BOARD"); return;}
+        if (boardVO == null) {
+            log.info("NO BOARD");
+            return;
+        }
 
         boardVO.setBoardTitle("수정된 게시글 제목");
         boardVO.setBoardContent("수정된 게시글 내용");

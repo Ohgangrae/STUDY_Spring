@@ -14,7 +14,7 @@ public class BoardMapperTests {
     private BoardMapper boardMapper;
 
     @Test
-    public void getListTest(){
+    public void getListTest() {
         boardMapper.getList(new Criteria(2, 10)).stream().map(BoardVO::toString).forEach(log::info);
     }
 
@@ -56,7 +56,7 @@ public class BoardMapperTests {
 //    }
 
     @Test
-    public void getTotalTest(){
+    public void getTotalTest() {
         log.info("총 개수 : " + boardMapper.getTotal());
     }
 }

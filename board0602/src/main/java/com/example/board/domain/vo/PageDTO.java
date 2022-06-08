@@ -29,11 +29,11 @@ public class PageDTO {
         this.criteria = criteria;
         this.total = total;
 //        현재 페이지를 기준으로 소수점까지 모두 계산하여 보여질 마지막 페이지 번호를 구한다.
-        this.endPage = (int)Math.ceil(criteria.getPageNum() / (double)pageCount) * pageCount;
+        this.endPage = (int) Math.ceil(criteria.getPageNum() / (double) pageCount) * pageCount;
         this.startPage = this.endPage - pageCount + 1;
-        this.realEnd = (int)Math.ceil((double)total / criteria.getAmount());
+        this.realEnd = (int) Math.ceil((double) total / criteria.getAmount());
 
-        if(realEnd < this.endPage){
+        if (realEnd < this.endPage) {
             this.endPage = realEnd;
         }
 

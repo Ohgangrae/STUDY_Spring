@@ -18,15 +18,15 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.HttpServletRequest;
 
 /*
-*   Task        URL                 Method      Parameter       Form        URL 이동
-*
-*   전체목록     /board/list          GET
-*   등록처리     /board/register      POST        모든 항목        필요         /board/list
-*   조회        /board/read          GET          bno
-*   삭제처리     /board/remove        GET         bno                         /board/list
-*   수정처리     /board/modify        POST        모든 항목        필요         /board/list
-*
-* */
+ *   Task        URL                 Method      Parameter       Form        URL 이동
+ *
+ *   전체목록     /board/list          GET
+ *   등록처리     /board/register      POST        모든 항목        필요         /board/list
+ *   조회        /board/read          GET          bno
+ *   삭제처리     /board/remove        GET         bno                         /board/list
+ *   수정처리     /board/modify        POST        모든 항목        필요         /board/list
+ *
+ * */
 
 @Controller
 @Slf4j
@@ -39,7 +39,7 @@ public class BoardController {
 //    리턴 타입을 void로 작성해도 되지만,
 //    다른 컨트롤러에서 getList()를 호출하기 때문에
 //    html 경로를 직접 문자열로 작성해야 한다.
-    public String getList(Criteria criteria, Model model){
+    public String getList(Criteria criteria, Model model) {
         log.info("*************");
         log.info("/list");
         log.info("*************");
@@ -49,10 +49,11 @@ public class BoardController {
     }
 
     @GetMapping("/register")
-    public void register(){}
+    public void register() {
+    }
 
     @PostMapping("/register")
-    public RedirectView register(BoardVO boardVO, RedirectAttributes rttr){
+    public RedirectView register(BoardVO boardVO, RedirectAttributes rttr) {
         log.info("*************");
         log.info("/register");
         log.info("*************");
@@ -72,7 +73,7 @@ public class BoardController {
     }
 
     @GetMapping({"/read", "/modify"})
-    public void read(Long boardBno, Criteria criteria, HttpServletRequest request, Model model){
+    public void read(Long boardBno, Criteria criteria, HttpServletRequest request, Model model) {
         log.info("*************");
         String requestURL = request.getRequestURI();
         log.info(requestURL.substring(requestURL.lastIndexOf("/")));
@@ -83,18 +84,18 @@ public class BoardController {
         model.addAttribute("board", boardService.read(boardBno));
     }
 
-//    수정
+    //    수정
 //    Redirect 방식으로 전송
 //    Flash로 데이터 전달 - 수정 성공 시에만 "success" 전달
     @PostMapping("/modify")
-    public RedirectView modify(BoardVO boardVO, Criteria criteria, RedirectAttributes rttr){
+    public RedirectView modify(BoardVO boardVO, Criteria criteria, RedirectAttributes rttr) {
         log.info("*************");
         log.info("/modify");
         log.info("*************");
         log.info("================================");
         log.info(criteria.toString());
         log.info("================================");
-        if(boardService.modify(boardVO)){
+        if (boardService.modify(boardVO)) {
 //            컨트롤러에서 다른 컨트롤러의 매개변수로 파라미터를 전달할 때에는
 //            addAttribute(), 쿼리스트링 방식으로 전달해야 받을 수 있다.
 //            Flash방식은 최종 응답 화면에서 사용될 파라미터를 전달할 때에만 사용하도록 한다.
@@ -106,7 +107,7 @@ public class BoardController {
     }
 
     @PostMapping("/remove")
-    public String remove(Long boardBno, Criteria criteria, Model model){
+    public String remove(Long boardBno, Criteria criteria, Model model) {
         log.info("*************");
         log.info("/remove");
         log.info("*************");

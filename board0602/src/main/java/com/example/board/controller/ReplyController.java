@@ -37,27 +37,27 @@ public class ReplyController {
     public ResponseEntity<String> create(@RequestBody ReplyVO replyVO) throws UnsupportedEncodingException {
         log.info("replyVO : " + replyVO);
         replyService.register(replyVO);
-        return new ResponseEntity<>(new String("댓글 등록 성공".getBytes(), "UTF-8") ,HttpStatus.OK);
+        return new ResponseEntity<>(new String("댓글 등록 성공".getBytes(), "UTF-8"), HttpStatus.OK);
     }
 
     //    댓글 1개 조회
     //    ("/{변수명}")
     //    @PathVariable  //해당경로에 있는 변수가 rno일 경우 그 값을 오른쪽에 넣어라
     @GetMapping("/{rno}")
-    public ReplyVO read(@PathVariable("rno") Long replyNumber){
+    public ReplyVO read(@PathVariable("rno") Long replyNumber) {
         log.info("read........ : " + replyNumber);
         return replyService.read(replyNumber);
     }
 
     //    댓글 전체 목록 조회
     @GetMapping("/list/{bno}/{page}")
-    public ReplyPageDTO getList(@PathVariable("page") int pageNum, @PathVariable("bno") Long boardBno){
+    public ReplyPageDTO getList(@PathVariable("page") int pageNum, @PathVariable("bno") Long boardBno) {
         return new ReplyPageDTO(replyService.getList(new Criteria(pageNum, 10), boardBno), replyService.getTotal(boardBno));
     }
 
     //    댓글 삭제
     @DeleteMapping("/{rno}")
-    public String remove(@PathVariable("rno") Long replyNumber){
+    public String remove(@PathVariable("rno") Long replyNumber) {
         replyService.remove(replyNumber);
         return "댓글 삭제 성공";
     }
@@ -66,11 +66,11 @@ public class ReplyController {
 //    PUT : 자원의 전체 수정, 자원 내 모든 필드를 전달해야 함, 일부만 전달할 경우 오류
 //    PATCH : 자원의 일부 수정, 수정할 필드만 전송(자동 주입이 아닌 부분만 수정하는 쿼리문에서 사용)
     @PatchMapping(value = {"/{rno}/{writer}", "/{rno}"}, consumes = "application/json")
-    public String modify(@PathVariable("rno") Long replyNumber, @PathVariable(value = "writer", required = false) String replyWriter, @RequestBody ReplyVO replyVO){
+    public String modify(@PathVariable("rno") Long replyNumber, @PathVariable(value = "writer", required = false) String replyWriter, @RequestBody ReplyVO replyVO) {
         log.info("modify......... : " + replyVO);
         log.info("modify......... : " + replyNumber);
 
-        if(replyVO.getReplyWriter() == null){ // JSON 검증
+        if (replyVO.getReplyWriter() == null) { // JSON 검증
             replyVO.setReplyWriter(Optional.ofNullable(replyWriter).orElse("anonymous")); // URI 검증
         }
         replyVO.setReplyNumber(replyNumber);

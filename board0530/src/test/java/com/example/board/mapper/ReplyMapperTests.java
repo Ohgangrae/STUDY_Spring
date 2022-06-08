@@ -18,7 +18,7 @@ public class ReplyMapperTests {
     private Long[] arBno = {2098603L, 2098602L, 2098601L, 2098600L, 2098599L};
 
     @Test
-    public void replyMapperTest(){
+    public void replyMapperTest() {
         log.info(replyMapper + "");
     }
 
@@ -60,7 +60,7 @@ public class ReplyMapperTests {
 //    }
 
     @Test
-    public void getListTest(){
+    public void getListTest() {
         replyDAO.getList(new Criteria(2, 10), 2098603L)
                 .stream().map(ReplyVO::toString).forEach(log::info);
     }

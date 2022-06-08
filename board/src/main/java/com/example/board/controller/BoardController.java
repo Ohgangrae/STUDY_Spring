@@ -13,15 +13,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 /*
-*   Task        URL                 Method      Parameter       Form        URL 이동
-*
-*   전체목록     /board/list          GET
-*   등록처리     /board/register      POST        모든 항목        필요         /board/list
-*   조회        /board/read          GET          bno
-*   삭제처리     /board/remove        GET         bno                         /board/list
-*   수정처리     /board/modify        POST        모든 항목        필요         /board/list
-*
-* */
+ *   Task        URL                 Method      Parameter       Form        URL 이동
+ *
+ *   전체목록     /board/list          GET
+ *   등록처리     /board/register      POST        모든 항목        필요         /board/list
+ *   조회        /board/read          GET          bno
+ *   삭제처리     /board/remove        GET         bno                         /board/list
+ *   수정처리     /board/modify        POST        모든 항목        필요         /board/list
+ *
+ * */
 
 @Controller
 @Slf4j
@@ -31,7 +31,7 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping("/list")
-    public void getList(Model model){
+    public void getList(Model model) {
         log.info("*************");
         log.info("/list");
         log.info("*************");
@@ -39,7 +39,7 @@ public class BoardController {
     }
 
     @PostMapping("/register")
-    public RedirectView register(BoardVO boardVO, RedirectAttributes rttr){
+    public RedirectView register(BoardVO boardVO, RedirectAttributes rttr) {
         log.info("*************");
         log.info("/register");
         log.info("*************");
@@ -59,19 +59,19 @@ public class BoardController {
     }
 
     @GetMapping("/read")
-    public void read(Long boardBno, Model model){
+    public void read(Long boardBno, Model model) {
         log.info("*************");
         log.info("/read");
         log.info("*************");
         model.addAttribute("board", boardService.read(boardBno));
     }
 
-//    수정
+    //    수정
 //    Redirect 방식으로 전송
 //    Flash로 데이터 전달 - 수정 성공 시에만 "success" 전달
     @PostMapping("/modify")
-    public RedirectView modify(BoardVO boardVO, RedirectAttributes rttr){
-        if(boardService.modify(boardVO)){
+    public RedirectView modify(BoardVO boardVO, RedirectAttributes rttr) {
+        if (boardService.modify(boardVO)) {
             rttr.addFlashAttribute("result", "success");
 
         }
@@ -80,7 +80,7 @@ public class BoardController {
         log.info("*************");
 
         return new RedirectView("/board/list");
-                                    /*아니면 "list"*/
+        /*아니면 "list"*/
     }
 
-    }
+}

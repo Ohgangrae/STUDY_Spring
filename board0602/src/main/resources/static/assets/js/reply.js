@@ -11,11 +11,11 @@
 */
 
 console.log("Reply Module......");
-let replyService = (function(){
+let replyService = (function () {
 //일회성으로 사용되는 함수
 
     //댓글 등록
-    function add(reply, callback, error){ //callback, error는 외부에서 전달받을 함수이다.
+    function add(reply, callback, error) { //callback, error는 외부에서 전달받을 함수이다.
         //함수의 파라미터 개수를 일치시킬 필요가 없기 때문에
         //사용시 callback이나 error와 같은 파라미터는 상황에 따라 작성한다.
         $.ajax({    /*$.ajax({name:오강래})*/
@@ -23,16 +23,16 @@ let replyService = (function(){
             type: "post",
             data: JSON.stringify(reply),//JSON.stringify() 이 메서드는 js값이나 객체를 json 문자열로 변환한다.
             // 전달할 JSON데이터에서 문자열 처리가 필요한 것들(key, dateType)을 자동으로 처리해준다.
-                contentType: "application/json",
+            contentType: "application/json",
             //여기까지가 보내기
-           success: function(result){//요청 완료시
-                if(callback){
+            success: function (result) {//요청 완료시
+                if (callback) {
                     //외부에서 전달받은 값이 있다면 결과를 해당 함수의 매개변수로 전달하여 사용한다.
                     callback(result);
                 }
             },
-            error: function(xhr, status, er){//요청 실패시
-                if(error){
+            error: function (xhr, status, er) {//요청 실패시
+                if (error) {
                     error(er);
                 }
             }
@@ -40,13 +40,13 @@ let replyService = (function(){
     }
 
     // 댓글 한 개 정보 가져오기
-    function get(rno, callback, error){
+    function get(rno, callback, error) {
         $.ajax({
             url: "/reply/" + rno,
             type: "get",
             dataType: "json",
-            success: function(reply){
-                if(callback){
+            success: function (reply) {
+                if (callback) {
                     callback(reply);
                 }
             }
@@ -54,12 +54,12 @@ let replyService = (function(){
     }
 
     //댓글 삭제
-    function remove(rno, callback, error){
+    function remove(rno, callback, error) {
         $.ajax({
             url: "/reply/" + rno,
             type: "delete",
-            success: function(result){
-                if(callback){
+            success: function (result) {
+                if (callback) {
                     callback(result);
                 }
             }
@@ -67,15 +67,15 @@ let replyService = (function(){
     }
 
     //댓글 수정
-    function modify(reply ,callback, error){
+    function modify(reply, callback, error) {
         $.ajax({
-           url: "/reply/" + reply.rno,
-           type: "patch", //ReplyController에 수정부분이 @PatchMapping이기 때문에
+            url: "/reply/" + reply.rno,
+            type: "patch", //ReplyController에 수정부분이 @PatchMapping이기 때문에
             data: JSON.stringify(reply),//JSON.stringify() 이 메서드는 js값이나 객체를 json 문자열로 변환한다.
             contentType: "application/json; charset=utf-8;",
 
-            success: function(result){
-                if(callback){
+            success: function (result) {
+                if (callback) {
                     callback(result);
                 }
             }
@@ -148,22 +148,29 @@ let replyService = (function(){
             let rDate = new Date(replyDate);
             let gap = today.getTime() - rDate.getTime();
 
-            if(gap < 1000 * 60 * 60 * 24){
+            if (gap < 1000 * 60 * 60 * 24) {
                 let h = rDate.getHours();
                 let m = rDate.getMinutes();
                 let s = rDate.getSeconds();
 
                 return [(h < 10 ? '0' : '') + h, (h < 10 ? '0' : '') + m, (h < 10 ? '0' : '') + s].join(":");
-            }else{
+            } else {
                 let y = rDate.getFullYear();
                 let m = rDate.getMonth();
                 let d = rDate.getDate();
 
-                return  [y, (m < 10 ? '0' : '') + m, (d < 10 ? '0' : '') + d]
+                return [y, (m < 10 ? '0' : '') + m, (d < 10 ? '0' : '') + d]
             }
 
         }
     }
 
-    return {add: add, get: get, remove: remove, modify: modify, getList: getList, getReplyDateByJavascript: getReplyDateByJavascript};
+    return {
+        add: add,
+        get: get,
+        remove: remove,
+        modify: modify,
+        getList: getList,
+        getReplyDateByJavascript: getReplyDateByJavascript
+    };
 })();

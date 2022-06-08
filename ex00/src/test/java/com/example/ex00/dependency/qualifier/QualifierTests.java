@@ -17,7 +17,7 @@ public class QualifierTests {
     private Restaurant restaurant;
 
     @Test
-    public void qualifierTest(){
+    public void qualifierTest() {
         log.info("----------------------------");
         log.info("computer : " + computer.getScreenWidth());
         log.info("----------------------------");

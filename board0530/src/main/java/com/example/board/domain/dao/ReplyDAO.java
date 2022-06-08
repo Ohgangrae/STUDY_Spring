@@ -16,31 +16,31 @@ public class ReplyDAO {
     private final ReplyMapper replyMapper;
 
     //댓글 추가
-    public void register(ReplyVO replyVO){
+    public void register(ReplyVO replyVO) {
         log.info("register..... : " + replyVO);
         replyMapper.insert(replyVO);
     }
 
     //댓글 1개 조회
-    public ReplyVO read(Long replyNumber){
+    public ReplyVO read(Long replyNumber) {
         log.info("read...... : " + replyNumber);
         return replyMapper.getReply(replyNumber);
     }
 
     //댓글 삭제
-    public boolean remove(Long replyNumber){
+    public boolean remove(Long replyNumber) {
         log.info("remove...... : " + replyNumber);
         return replyMapper.delete(replyNumber) == 1;
     }
 
     //댓글 수정
-    public boolean modify(ReplyVO replyVO){
+    public boolean modify(ReplyVO replyVO) {
         log.info("modify........ : " + replyVO);
         return replyMapper.update(replyVO) == 1;
     }
 
     //댓글 목록
-    public List<ReplyVO> getList(Criteria criteria, Long boardBno){
+    public List<ReplyVO> getList(Criteria criteria, Long boardBno) {
         log.info("getList........ : " + criteria);
         log.info("getList........ : " + boardBno);
         return replyMapper.getList(criteria, boardBno);

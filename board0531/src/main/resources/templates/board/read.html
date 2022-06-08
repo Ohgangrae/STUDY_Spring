@@ -6,57 +6,59 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>게시글 상세보기</title>
-    <link rel="stylesheet" href="/assets/css/main.css" />
+    <link rel="stylesheet" href="/assets/css/main.css"/>
     <style>
-        body {transform: scale(0.8);}
+        body {
+            transform: scale(0.8);
+        }
     </style>
 </head>
 <body>
-    <!-- Main -->
-    <div id="main">
-        <div class="wrapper">
-            <div class="inner">
+<!-- Main -->
+<div id="main">
+    <div class="wrapper">
+        <div class="inner">
 
-                <!-- Elements -->
-                <header class="major">
-                    <h1>Board</h1>
-                    <p>게시글 상세보기</p>
-                </header>
-                <!-- Table -->
-                <h3><a id="goList" class="button small">목록 보기</a></h3>
-                <div class="content">
-                    <div class="form">
-                        <form method="post" action="/board/remove" th:object="${board}">
-                            <div class="fields">
-                                <div class="field">
-                                    <h4>번호</h4>
-                                    <input type="text" readonly th:field="*{boardBno}"/>
-                                </div>
-                                <div class="field">
-                                    <h4>제목</h4>
-                                    <input type="text" readonly th:field="*{boardTitle}"/>
-                                </div>
-                                <div class="field">
-                                    <h4>내용</h4>
-                                    <textarea rows="6" style="resize:none" readonly th:field="*{boardContent}"></textarea>
-                                </div>
-                                <div class="field">
-                                    <h4>작성자</h4>
-                                    <input type="text" readonly th:field="*{boardWriter}"/>
-                                </div>
+            <!-- Elements -->
+            <header class="major">
+                <h1>Board</h1>
+                <p>게시글 상세보기</p>
+            </header>
+            <!-- Table -->
+            <h3><a id="goList" class="button small">목록 보기</a></h3>
+            <div class="content">
+                <div class="form">
+                    <form method="post" action="/board/remove" th:object="${board}">
+                        <div class="fields">
+                            <div class="field">
+                                <h4>번호</h4>
+                                <input type="text" readonly th:field="*{boardBno}"/>
                             </div>
-                            <ul class="actions special">
-                                <li>
-                                    <input type="button" class="button" value="수정" onclick="goUpdate()"/>
-                                    <input type="submit" class="button" value="삭제"/>
-                                </li>
-                            </ul>
-                        </form>
-                    </div>
+                            <div class="field">
+                                <h4>제목</h4>
+                                <input type="text" readonly th:field="*{boardTitle}"/>
+                            </div>
+                            <div class="field">
+                                <h4>내용</h4>
+                                <textarea rows="6" style="resize:none" readonly th:field="*{boardContent}"></textarea>
+                            </div>
+                            <div class="field">
+                                <h4>작성자</h4>
+                                <input type="text" readonly th:field="*{boardWriter}"/>
+                            </div>
+                        </div>
+                        <ul class="actions special">
+                            <li>
+                                <input type="button" class="button" value="수정" onclick="goUpdate()"/>
+                                <input type="submit" class="button" value="삭제"/>
+                            </li>
+                        </ul>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </body>
 <!-- Scripts -->
 <script src="/assets/js/jquery.min.js"></script>
@@ -70,11 +72,11 @@
     let paging = [[${criteria.listLink}]];
     console.log(paging);
 
-    function goUpdate(){
+    function goUpdate() {
         location.href = '/board/modify' + paging + '&boardBno=' + boardBno;
     }
 
-    $("a#goList").click(function(e){
+    $("a#goList").click(function (e) {
         e.preventDefault();
         location.href = "/board/list" + paging;
     })

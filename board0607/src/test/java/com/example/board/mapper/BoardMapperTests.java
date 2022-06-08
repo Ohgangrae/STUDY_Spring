@@ -14,7 +14,7 @@ public class BoardMapperTests {
     private BoardMapper boardMapper;
 
     @Test
-    public void getListTest(){
+    public void getListTest() {
         boardMapper.getList(new Criteria(2, 10)).stream().map(BoardVO::toString).forEach(log::info);
     }
 

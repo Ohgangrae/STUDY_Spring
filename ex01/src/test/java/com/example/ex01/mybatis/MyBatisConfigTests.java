@@ -20,21 +20,20 @@ public class MyBatisConfigTests {
     private DataSource dataSource;
 
     @Test
-    public void datasourceTest(){
+    public void datasourceTest() {
         try
-           (
-                   Connection conn = dataSource.getConnection();
-           )
-        {
+                (
+                        Connection conn = dataSource.getConnection();
+                ) {
             log.info("---------------------------");
             log.info("dataSource connection : " + conn);
             log.info("---------------------------");
-        } catch (Exception e){
+        } catch (Exception e) {
             log.error(e.getMessage());
         }
     }
 
-    public void sqlSessionTest(){
+    public void sqlSessionTest() {
         log.info("-----------------------------");
         log.info("sqlSessionFactory : " + sqlSessionFactory);
         log.info("-----------------------------");
@@ -43,13 +42,12 @@ public class MyBatisConfigTests {
                 (
                         SqlSession sqlSession = sqlSessionFactory.openSession(true);
                         Connection conn = sqlSession.getConnection();
-                )
-        {
+                ) {
             log.info("---------------------------");
             log.info("sqlSession : " + sqlSession);
             log.info("sqlSession connection : " + conn);
             log.info("---------------------------");
-        } catch (Exception e){
+        } catch (Exception e) {
             log.error(e.getMessage());
         }
 

@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service//해당 클래스가 Service라는 것을 알리기 위해서 붙인다
 @RequiredArgsConstructor//final 또는 @NonNull이 붙은 필드만 초기화 생성자로 선언
-public class BoardServiceImpl implements BoardService{
+public class BoardServiceImpl implements BoardService {
     private final BoardDAO boardDAO;
     //    (mapper.xml -> mapper) -> (dao -> service) -> Controller
 
@@ -40,5 +40,7 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public int getTotal() { return boardDAO.getTotal(); }
+    public int getTotal() {
+        return boardDAO.getTotal();
+    }
 }

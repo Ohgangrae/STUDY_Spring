@@ -18,7 +18,7 @@ public class ReplyDaoTests {
     private Long[] arBno = {2098603L, 2098602L, 2098601L, 2098600L, 2098599L};
 
     @Test
-    public void replyDAOTest(){
+    public void replyDAOTest() {
         log.info(replyDAO + "");
     }
 
@@ -59,7 +59,7 @@ public class ReplyDaoTests {
 //    }
 
     @Test
-    public void getTotalTest(){
+    public void getTotalTest() {
         log.info("댓글 개수 : " + replyDAO.getTotal(2098603L));
     }
 }

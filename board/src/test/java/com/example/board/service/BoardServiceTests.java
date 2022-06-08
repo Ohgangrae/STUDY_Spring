@@ -13,12 +13,12 @@ public class BoardServiceTests {
     private BoardService boardService;
 
     @Test
-    public void getListTest(){
+    public void getListTest() {
         boardService.getList().stream().map(BoardVO::toString).forEach(log::info);
     }
 
     @Test
-    public void registerTest(){
+    public void registerTest() {
         BoardVO boardVO = new BoardVO();
         boardVO.setBoardTitle("새로운 게시글 제목3");
         boardVO.setBoardContent("새로운 게시글 내용3");

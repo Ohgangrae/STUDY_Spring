@@ -6,9 +6,12 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>게시글 작성</title>
-    <link rel="stylesheet" href="/assets/css/main.css" />
+    <link rel="stylesheet" href="/assets/css/main.css"/>
     <style>
-        body {transform: scale(0.8); margin-top: -50px;}
+        body {
+            transform: scale(0.8);
+            margin-top: -50px;
+        }
     </style>
 </head>
 <body>
@@ -30,19 +33,20 @@
                         <div class="fields">
                             <div class="field">
                                 <h4>제목</h4>
-                                <input name="boardTitle" placeholder="Title" type="text" />
+                                <input name="boardTitle" placeholder="Title" type="text"/>
                             </div>
                             <div class="field">
                                 <h4>내용</h4>
-                                <textarea name="boardContent" rows="6" placeholder="Content" style="resize:none"></textarea>
+                                <textarea name="boardContent" rows="6" placeholder="Content"
+                                          style="resize:none"></textarea>
                             </div>
                             <div class="field">
                                 <h4>작성자</h4>
-                                <input name="boardWriter" placeholder="Writer" type="text" />
+                                <input name="boardWriter" placeholder="Writer" type="text"/>
                             </div>
                         </div>
                         <ul class="actions special">
-                            <li><input type="submit" class="button" value="등록" /></li>
+                            <li><input type="submit" class="button" value="등록"/></li>
                         </ul>
                     </form>
                 </div>

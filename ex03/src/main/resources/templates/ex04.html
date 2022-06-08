@@ -8,19 +8,19 @@
     <title>EX04</title>
 </head>
 <body>
-    <h1>EX04</h1>
-    <table border="1">
-        <tr>
-            <th>번호</th>
-            <th>총점</th>
-            <th>평균</th>
-        </tr>
-        <tr th:object="${taskVO}">
-            <td th:text="*{num}"></td>
-            <td th:text="*{kor + eng + math} + '점'"></td>
-            <td th:text="|*{(kor + eng + math) / 3.0}점|"></td>
-        </tr>
-    </table>
+<h1>EX04</h1>
+<table border="1">
+    <tr>
+        <th>번호</th>
+        <th>총점</th>
+        <th>평균</th>
+    </tr>
+    <tr th:object="${taskVO}">
+        <td th:text="*{num}"></td>
+        <td th:text="*{kor + eng + math} + '점'"></td>
+        <td th:text="|*{(kor + eng + math) / 3.0}점|"></td>
+    </tr>
+</table>
 </body>
 </html>
 

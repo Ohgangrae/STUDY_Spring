@@ -6,21 +6,53 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>게시글 목록</title>
-    <link rel="stylesheet" href="/assets/css/main.css" />
+    <link rel="stylesheet" href="/assets/css/main.css"/>
     <style>
-        body {transform: scale(0.8);}
-        div.small-width {display: none;}
-        div.big-width {display: block;}
+        body {
+            transform: scale(0.8);
+        }
+
+        div.small-width {
+            display: none;
+        }
+
+        div.big-width {
+            display: block;
+        }
 
         @media (max-width: 918px) {
-            div.wrapper {padding-top: 0;}
-            div.inner {max-width: calc(100% - 2rem);}
-            body {transform: scale(1.0); overflow-x: hidden;}
-            div.table-wrapper {overflow-x: hidden;}
-            .boardBno {display: none;}
-            .boardUpdateDate {display: none;}
-            div.small-width {display: block;}
-            div.big-width {display: none;}
+            div.wrapper {
+                padding-top: 0;
+            }
+
+            div.inner {
+                max-width: calc(100% - 2rem);
+            }
+
+            body {
+                transform: scale(1.0);
+                overflow-x: hidden;
+            }
+
+            div.table-wrapper {
+                overflow-x: hidden;
+            }
+
+            .boardBno {
+                display: none;
+            }
+
+            .boardUpdateDate {
+                display: none;
+            }
+
+            div.small-width {
+                display: block;
+            }
+
+            div.big-width {
+                display: none;
+            }
         }
 
     </style>
@@ -54,7 +86,8 @@
                     <th:block th:each="board:${boardList}">
                         <tr th:object="${board}">
                             <td class="boardBno" th:text="*{boardBno}"></td>
-                            <td class="boardTitle"><a class="goRead" th:text="*{boardTitle}" th:href="*{boardBno}"></a></td>
+                            <td class="boardTitle"><a class="goRead" th:text="*{boardTitle}" th:href="*{boardBno}"></a>
+                            </td>
                             <td class="boardWriter" th:text="*{boardWriter}"></td>
                             <td class="boardRegisterDate" th:text="*{boardRegisterDate}"></td>
                             <td class="boardUpdateDate" th:text="*{boardUpdateDate}"></td>
@@ -67,14 +100,16 @@
                         <a class="changePage" th:href="*{startPage - 1}" th:if="*{prev}"><code>&lt;</code></a>
                         <th:block th:each="num:${#numbers.sequence(pageDTO.startPage, pageDTO.endPage)}">
                             <code th:if="${num == pageDTO.criteria.pageNum}" th:text="${num}"></code>
-                            <a class="changePage" th:href="${num}" th:unless="${num == pageDTO.criteria.pageNum}"><code th:text="${num}"></code></a>
+                            <a class="changePage" th:href="${num}" th:unless="${num == pageDTO.criteria.pageNum}"><code
+                                    th:text="${num}"></code></a>
                         </th:block>
                         <a class="changePage" th:href="*{endPage + 1}" th:if="*{next}"><code>&gt;</code></a>
                     </div>
                     <div class="small-width" style="text-align: center; height: 27px;">
                         <a class="changePage" th:href="*{criteria.pageNum - 1}" th:if="*{criteria.pageNum > 1}"><code>&lt;</code></a>
                         <code th:text="*{criteria.pageNum}"></code>
-                        <a class="changePage" th:href="*{criteria.pageNum + 1}" th:if="*{criteria.pageNum < realEnd}"><code>&gt;</code></a>
+                        <a class="changePage" th:href="*{criteria.pageNum + 1}"
+                           th:if="*{criteria.pageNum < realEnd}"><code>&gt;</code></a>
                     </div>
                 </div>
                 <form action="/board/list" name="pageForm" th:object="${criteria}">
@@ -98,21 +133,21 @@
     let boardBno = [[${boardBno}]];
     let paging = [[${criteria.listLink}]];
 
-    if(boardBno != null){
+    if (boardBno != null) {
         alert(boardBno + "번 게시글이 등록되었습니다.");
     }
 
     //    a 태그의 href에 이동할 페이지 번호를 담아준다.
     //    a 태그 클릭 시 /board/list로 이동할 페이지를 전달하여 목록을 다시 뿌려준다.
-    $("a.changePage").click(function(e){
+    $("a.changePage").click(function (e) {
         e.preventDefault();
         $(pageForm).find("input[name='pageNum']").val($(this).attr("href"));
         $(pageForm).submit();
     });
 
-    $("a.goRead").click(function(e){
+    $("a.goRead").click(function (e) {
         e.preventDefault();
-        location.href = "/board/read" + paging + "&boardBno="+$(this).attr('href');
+        location.href = "/board/read" + paging + "&boardBno=" + $(this).attr('href');
     });
 
 </script>

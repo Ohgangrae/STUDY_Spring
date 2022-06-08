@@ -47,18 +47,21 @@ public class BoardServiceTests {
 //    }
 
     @Test
-    public void modifyTest(){
+    public void modifyTest() {
         Long boardBno = 3L;
         BoardVO boardVO = boardService.read(boardBno);
-        if(boardVO == null) { log.info("NO BOARD"); return;}
+        if (boardVO == null) {
+            log.info("NO BOARD");
+            return;
+        }
 
         boardVO.setBoardTitle("수정된 게시글 제목3");
         boardVO.setBoardContent("수정된 게시글 내용3");
         boardVO.setBoardWriter("한동석");
 
-        if(boardService.modify(boardVO)){
+        if (boardService.modify(boardVO)) {
             log.info("UPDATE SUCCESS");
-        }else{
+        } else {
             log.info("UPDATE FAIL");
         }
     }

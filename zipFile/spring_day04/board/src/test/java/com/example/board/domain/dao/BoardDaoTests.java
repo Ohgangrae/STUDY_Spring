@@ -47,18 +47,21 @@ public class BoardDaoTests {
 //    }
 
     @Test
-    public void modifyTest(){
+    public void modifyTest() {
         Long boardBno = 3L;
         BoardVO boardVO = boardDAO.read(boardBno);
-        if(boardVO == null) { log.info("NO BOARD"); return;}
+        if (boardVO == null) {
+            log.info("NO BOARD");
+            return;
+        }
 
         boardVO.setBoardTitle("수정된 게시글 제목2");
         boardVO.setBoardContent("수정된 게시글 내용2");
         boardVO.setBoardWriter("한동석");
 
-        if(boardDAO.modify(boardVO)){
+        if (boardDAO.modify(boardVO)) {
             log.info("UPDATE SUCCESS");
-        }else{
+        } else {
             log.info("UPDATE FAIL");
         }
     }

@@ -6,12 +6,16 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>게시글 상세보기</title>
-    <link rel="stylesheet" href="/assets/css/main.css" />
+    <link rel="stylesheet" href="/assets/css/main.css"/>
     <style>
-        body {transform: scale(0.8);}
+        body {
+            transform: scale(0.8);
+        }
+
         .line {
             border-bottom: 1px solid #ff8b77;
         }
+
         li {
             list-style: none;
         }
@@ -103,42 +107,42 @@
 
     showList(pageNum);
 
-    function showList(page){
-        replyService.getList({bno: boardBno, page: page}, function(total, list){
+    function showList(page) {
+        replyService.getList({bno: boardBno, page: page}, function (total, list) {
             let str = "";
 
-            if(list == null || list.length == 0){
+            if (list == null || list.length == 0) {
                 replyUL.html("");
                 return;
             }
             //숙제, each문으로 바꾸기
             //     수정되었을 때에는 수정된 날짜로 출력하기
             //     출력된 시간 순으로 목록 구성하기
-            $.each(list, function(i, reply){
+            $.each(list, function (i, reply) {
 
             });
-            //     for(let i=0; i<list.length; i++){
-            //         str += "<li>";
-            //         str += "<strong>" + list[i].replyWriter + "</strong>";
-            //         str += "<div style='display: flex; justify-content: space-between;'>";
-            //         str += "<p>" + list[i].replyContent + "</p>"
-            //         str += "<p><strong>" + replyService.getReplyDateByJavascript(list[i].replyRegisterDate) + "</strong></p>"
-            //         str += "</div>";
-            //         str += "<div class='line'></div>";
-            //         str += "</li>";
-            //     }
-            //     replyUL.html(str);
-            //     showReplyPage(total);
+            for (let i = 0; i < list.length; i++) {
+                str += "<li>";
+                str += "<strong>" + list[i].replyWriter + "</strong>";
+                str += "<div style='display: flex; justify-content: space-between;'>";
+                str += "<p>" + list[i].replyContent + "</p>"
+                str += "<p><strong>" + replyService.getReplyDateByJavascript(list[i].replyRegisterDate) + "</strong></p>"
+                str += "</div>";
+                str += "<div class='line'></div>";
+                str += "</li>";
+            }
+            replyUL.html(str);
+            showReplyPage(total);
         });
     }
 
-    function showReplyPage(total){
+    function showReplyPage(total) {
         let endPage = Math.ceil(pageNum / 10.0) * 10;
         let startPage = endPage - 9;
         let realEnd = Math.ceil(total / 10.0);
         const $paging = $(".paging");
 
-        if(endPage > realEnd){
+        if (endPage > realEnd) {
             endPage = realEnd;
         }
 
@@ -146,13 +150,13 @@
         let next = endPage * 10 < total;
         let str = "";
 
-        if(prev){
+        if (prev) {
             str += "<a class='changePage' href='" + (startPage - 1) + "'><code>&lt;</code></a>"
         }
-        for(let i = startPage; i <= endPage; i++){
+        for (let i = startPage; i <= endPage; i++) {
             str += pageNum == i ? "<code>" + i + "</code>" : "<a class='changePage' href='" + i + "'><code>" + i + "</code></a>";
         }
-        if(next){
+        if (next) {
             str += "<a class='changePage' href='" + (endPage + 1) + "'><code>&gt;</code></a>"
         }
         $paging.html(str);
@@ -163,24 +167,24 @@
     //컴파일 순서 상 DOM으로 작성한 코드가 더 늦게 실행되기 때문에,
     //기존 문서에 작성된 HTML코드에 이벤트를 주고, 그 안에 추가할 자식 요소에 이벤트를 전달하는 형식으로 개발한다.
 
-    $(".paging").on("click", "a.changePage", function(e){
+    $(".paging").on("click", "a.changePage", function (e) {
         e.preventDefault();
         pageNum = $(this).attr("href");
         showList(pageNum);
     });
 
-    $(".finish").click(function(e){
+    $(".finish").click(function (e) {
         e.preventDefault();
         const $replyWriter = $("input[name='replier']").val();
         const $replyContent = $("textarea[name='reply']").val();
 
-        if(!$replyWriter || !$replyContent){
+        if (!$replyWriter || !$replyContent) {
             alert("내용을 입력해주세요.");
             return;
         }
 
         replyService.add({boardBno: boardBno, replyWriter: $replyWriter, replyContent: $replyContent},
-            function(result){
+            function (result) {
                 $("input[name='replier']").val("");
                 $("textarea[name='reply']").val("");
                 showList(1);
@@ -190,23 +194,23 @@
     })
 
 
-    $(".register").on("click", function(e){
+    $(".register").on("click", function (e) {
         e.preventDefault(); //기존 이벤트 없애기
         $(".register-form").show();
         $(this).hide();
     });
 
-    $(".cancel").on("click", function(e){
+    $(".cancel").on("click", function (e) {
         e.preventDefault();
         $(".register-form").hide();
         $(".register").show();
     });
 
-    function goUpdate(){
+    function goUpdate() {
         location.href = '/board/modify' + paging + '&boardBno=' + boardBno;
     }
 
-    $("a#goList").click(function(e){
+    $("a#goList").click(function (e) {
         e.preventDefault();
         location.href = "/board/list" + paging;
     });

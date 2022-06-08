@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class BoardServiceImpl implements BoardService{
+public class BoardServiceImpl implements BoardService {
     private final BoardDAO boardDAO;
 
     @Override
@@ -39,5 +39,7 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public int getTotal() { return boardDAO.getTotal(); }
+    public int getTotal() {
+        return boardDAO.getTotal();
+    }
 }

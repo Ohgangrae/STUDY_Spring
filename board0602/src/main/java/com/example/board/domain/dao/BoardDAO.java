@@ -21,27 +21,29 @@ public class BoardDAO {
 //    BoardDao에서 메소드 명을 바꿔준다.
 //    이유는는?
 
-    public List<BoardVO> getList(Criteria criteria){
+    public List<BoardVO> getList(Criteria criteria) {
         return boardMapper.getList(criteria);
     }
 
-    public void register(BoardVO boardVO){
+    public void register(BoardVO boardVO) {
         boardMapper.insert(boardVO);
     }
 
-    public BoardVO read(Long bno){
+    public BoardVO read(Long bno) {
         return boardMapper.get(bno);
     }
 
-    public boolean remove(Long bno){
+    public boolean remove(Long bno) {
         return boardMapper.delete(bno) != 0;
     }
 
-    public boolean modify(BoardVO boardVO){
+    public boolean modify(BoardVO boardVO) {
         return boardMapper.update(boardVO) != 0;
     }
 
-    public int getTotal(){ return boardMapper.getTotal(); }
+    public int getTotal() {
+        return boardMapper.getTotal();
+    }
 }
 
 

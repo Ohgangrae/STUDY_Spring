@@ -12,9 +12,14 @@ import java.util.List;
 public interface BoardService {
 
     public void register(BoardVO boardVO);          //등록
+
     public BoardVO read(Long boardBno);             //상세보기
+
     public boolean modify(BoardVO boardVO);         //수정
+
     public boolean remove(Long boardBno);           //삭제
+
     public List<BoardVO> getList(Criteria criteria);//목록
+
     public int getTotal();                          //전체개수
 }

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 @Qualifier("outback")
-public class Outback implements Restaurant{
+public class Outback implements Restaurant {
     @Override
     public boolean checkSidebar() {
         return false;

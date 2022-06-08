@@ -18,42 +18,42 @@
     </style>
 </head>
 <body>
-    <form action="/ex/userLogin" method="post" name="loginForm">
-        <div>
-            <input type="text" name="userId" placeholder="아이디를 입력하세요">
-            <p id="checkId"></p>
-        </div>
-        <div style="position: relative; width: fit-content;">
-            <input type="password" name="userPw" placeholder="패스워드를 입력하세요">
-            <p id="checkPw"></p>
-            <div id="img" style="position: absolute"></div>
-        </div>
-        <div>
-            <input type="button" value="로그인" onclick="send()">
-        </div>
-    </form>
+<form action="/ex/userLogin" method="post" name="loginForm">
+    <div>
+        <input type="text" name="userId" placeholder="아이디를 입력하세요">
+        <p id="checkId"></p>
+    </div>
+    <div style="position: relative; width: fit-content;">
+        <input type="password" name="userPw" placeholder="패스워드를 입력하세요">
+        <p id="checkPw"></p>
+        <div id="img" style="position: absolute"></div>
+    </div>
+    <div>
+        <input type="button" value="로그인" onclick="send()">
+    </div>
+</form>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 
-    $("div#img").click(function(){
+    $("div#img").click(function () {
         const $input = $("input[name='userPw']");
-        if($input.attr("type") == "password"){
+        if ($input.attr("type") == "password") {
             $input.attr("type", "text");
             $(this).css("background-image", "url('/eye_half.png')");
-        }else{
+        } else {
             $input.attr("type", "password");
             $(this).css("background-image", "url('/eye.jpg')");
         }
     })
 
-    function send(){
-        if(!loginForm.userId.value){
+    function send() {
+        if (!loginForm.userId.value) {
             $("#checkId").text("아이디를 작성해주세요.");
             $("#checkId").css("color", "red");
             return;
         }
-        if(!loginForm.userPw.value){
+        if (!loginForm.userPw.value) {
             $("#checkPw").text("비밀번호를 작성해주세요.");
             $("#checkPw").css("color", "red");
             return;

@@ -24,7 +24,7 @@ public class Criteria {
         this.amount = amount;
     }
 
-    public String getListLink(){
+    public String getListLink() {
         UriComponentsBuilder builder = UriComponentsBuilder.fromPath("")
                 .queryParam("pageNum", this.pageNum)
                 .queryParam("amount", this.amount)
@@ -34,8 +34,8 @@ public class Criteria {
         return builder.toUriString();
     }
 
-    public String[] getTypes(){
-        return type == null ? new String[] {} : type.split("");
+    public String[] getTypes() {
+        return type == null ? new String[]{} : type.split("");
     }
 }
 

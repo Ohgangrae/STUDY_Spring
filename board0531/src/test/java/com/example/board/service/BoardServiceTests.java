@@ -65,7 +65,7 @@ public class BoardServiceTests {
 //    }
 
     @Test
-    public void getTotalTest(){
+    public void getTotalTest() {
         log.info("총 개수 : " + boardService.getTotal());
     }
 }

@@ -1,10 +1,10 @@
 package com.example.board.controller;
 /*
-* REST(Representational State Transfer)
-*       데이터 전송 상태 즉 url이 하나의 정보이다
-*       하나의 URI는 하나의 고유한 리소스(데이터)를 대표하도록 설계된다.
-*       예)/board/123 : 게시글의 전체 정보
-* */
+ * REST(Representational State Transfer)
+ *       데이터 전송 상태 즉 url이 하나의 정보이다
+ *       하나의 URI는 하나의 고유한 리소스(데이터)를 대표하도록 설계된다.
+ *       예)/board/123 : 게시글의 전체 정보
+ * */
 
 import com.example.board.domain.vo.ReplyVO;
 import com.example.board.service.ReplyService;
@@ -34,10 +34,10 @@ public class ReplyController {
     //ResponseEntity : 서버의 상태코드, 응답 메세지 등을 담을 수 있는 타입
     //@RequestBody : 전달받은 데이터를 알맞는 매개변수로 주입할 때 사용
     @PostMapping(value = "/new", consumes = "application/json", produces = "text/plain; charset=utf-8")
-    public ResponseEntity<String> create(@RequestBody ReplyVO replyVO) throws UnsupportedEncodingException{
+    public ResponseEntity<String> create(@RequestBody ReplyVO replyVO) throws UnsupportedEncodingException {
         log.info("replyVO : " + replyVO);
         replyService.register(replyVO);
-        return new ResponseEntity<>(new String("댓글 등록 성공".getBytes(), "UTF-8") ,HttpStatus.OK)
+        return new ResponseEntity<>(new String("댓글 등록 성공".getBytes(), "UTF-8"), HttpStatus.OK)
     }
 
 }

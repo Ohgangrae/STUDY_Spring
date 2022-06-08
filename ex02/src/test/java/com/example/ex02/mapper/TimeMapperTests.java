@@ -12,7 +12,7 @@ public class TimeMapperTests {
     private TimeMapper timeMapper;
 
     @Test
-    public void getTimeTest(){
+    public void getTimeTest() {
         String now = timeMapper.getTime();
         log.info("----------------------------");
         log.info("현재시간 : " + now);

@@ -29,13 +29,11 @@
     <update id="update">
         UPDATE TBL_BOARD
         SET BOARD_TITLE = #{boardTitle}, BOARD_CONTENT = #{boardContent},
-            BOARD_WRITER = #{boardWriter}, BOARD_UPDATE_DATE = SYSDATE
+        BOARD_WRITER = #{boardWriter}, BOARD_UPDATE_DATE = SYSDATE
         WHERE BOARD_BNO = #{boardBno}
     </update>
 
     <
-
-
 
 
 </mapper>

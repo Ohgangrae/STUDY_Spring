@@ -17,7 +17,7 @@ public class ReplyDaoTests {
     private Long[] arBno = {2098603L, 2098602L, 2098601L, 2098600L, 2098599L};
 
     @Test
-    public void replyDAOTest(){
+    public void replyDAOTest() {
         log.info(replyDAO + "");
     }
 
@@ -34,17 +34,17 @@ public class ReplyDaoTests {
 //    }
 
     @Test
-    public void readTest(){
+    public void readTest() {
         log.info(replyDAO.read(27L).toString());
     }
 
     @Test
-    public void removeTest(){
+    public void removeTest() {
         log.info("DELETE COUNT : " + replyDAO.remove(2L));
     }
 
     @Test
-    public void modifyTest(){
+    public void modifyTest() {
         ReplyVO replyVO = new ReplyVO();
         replyVO.setReplyNumber(3L);
         replyVO.setBoardBno(2098603L);

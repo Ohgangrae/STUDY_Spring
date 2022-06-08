@@ -18,7 +18,7 @@ public class ReplyMapperTests {
     private Long[] arBno = {157L, 158L, 159L, 160L, 161L};
 
     @Test
-    public void replyMapperTest(){
+    public void replyMapperTest() {
         log.info(replyMapper + "");
     }
 
@@ -60,7 +60,7 @@ public class ReplyMapperTests {
 //    }
 
     @Test
-    public void getTotalTest(){
+    public void getTotalTest() {
         log.info("댓글 개수 : " + replyMapper.getTotal(157L));
     }
 }

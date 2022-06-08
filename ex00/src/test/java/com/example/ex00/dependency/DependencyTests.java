@@ -16,7 +16,7 @@ public class DependencyTests {
     private Restaurant restaurant;
 
     @Test
-    public void dependencyTest(){
+    public void dependencyTest() {
         log.info("-----------------------------");
         log.info("coding : " + coding);
         log.info("computer: " + coding.getComputer());

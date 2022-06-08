@@ -18,7 +18,7 @@ public class ReplyMapperTests {
     private Long[] arBno = {157L, 158L, 159L, 160L, 161L};
 
     @Test
-    public void replyMapperTest(){
+    public void replyMapperTest() {
         log.info(replyMapper + "");
     }
 
@@ -53,16 +53,18 @@ public class ReplyMapperTests {
 //        log.info("UPDATE COUNT : " + replyMapper.update(replyVO));
 //    }
 
+    @Test
+    public void getListTest() {
+        replyMapper.getList(new Criteria(1, 10), 157L)
+                .stream().map(ReplyVO::toString).forEach(log::info);
+    }
+
 //    @Test
-//    public void getListTest(){
-//        replyMapper.getList(new Criteria(2, 10), 2098603L)
-//                .stream().map(ReplyVO::toString).forEach(log::info);
+//    public void getTotalTest(){
+//        log.info("댓글 개수 : " + replyMapper.getTotal(157L));
 //    }
 
-    @Test
-    public void getTotalTest(){
-        log.info("댓글 개수 : " + replyMapper.getTotal(157L));
-    }
+
 }
 
 

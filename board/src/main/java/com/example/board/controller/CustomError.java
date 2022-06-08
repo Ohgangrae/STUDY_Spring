@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class CustomError implements ErrorController {
     @GetMapping("/error")
-    public String hanleError(HttpServletRequest request){
+    public String hanleError(HttpServletRequest request) {
         return "error/error";
     }
 }

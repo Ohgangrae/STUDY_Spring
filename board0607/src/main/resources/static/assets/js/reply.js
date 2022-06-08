@@ -3,22 +3,22 @@
 * */
 
 console.log("Reply Module......");
-let replyService = (function(){
+let replyService = (function () {
 
-    function add(reply, callback, error){
+    function add(reply, callback, error) {
         console.log("add reply..........");
         $.ajax({
             url: "/reply/new",
             type: "post",
             data: JSON.stringify(reply),
             contentType: "application/json",
-            success: function(result){
-               if(callback){
-                   callback(result);
-               }
+            success: function (result) {
+                if (callback) {
+                    callback(result);
+                }
             },
-            error: function(xhr, status, er){
-                if(error){
+            error: function (xhr, status, er) {
+                if (error) {
                     error(xhr, status, er);
                 }
             }
@@ -26,13 +26,13 @@ let replyService = (function(){
     }
 
     //댓글 한 개 정보 가져오기
-    function get(rno, callback, error){
+    function get(rno, callback, error) {
         $.ajax({
             url: "/reply/" + rno,
             type: "get",
             dataType: "json",
-            success: function(reply){
-                if(callback){
+            success: function (reply) {
+                if (callback) {
                     callback(reply);
                 }
             }
@@ -40,12 +40,12 @@ let replyService = (function(){
     }
 
     //댓글 삭제
-    function remove(rno, callback, error){
+    function remove(rno, callback, error) {
         $.ajax({
             url: "/reply/" + rno,
             type: "delete",
-            success: function(result){
-                if(callback){
+            success: function (result) {
+                if (callback) {
                     callback(result);
                 }
             }
@@ -53,14 +53,14 @@ let replyService = (function(){
     }
 
     // 댓글 수정
-    function modify(reply, callback){
+    function modify(reply, callback) {
         $.ajax({
             url: "/reply/" + reply.rno,
             type: "patch",
             data: JSON.stringify(reply),
             contentType: "application/json; charset=utf-8;",
-            success: function(result){
-                if(callback){
+            success: function (result) {
+                if (callback) {
                     callback(result);
                 }
             }
@@ -68,13 +68,13 @@ let replyService = (function(){
     }
 
     //댓글 목록
-    function getList(param, callback){
+    function getList(param, callback) {
         $.ajax({
             url: "/reply/list/" + param.bno + "/" + param.page,
             type: "get",
             dataType: "json",
-            success: function(replyPageDTO){
-                if(callback){
+            success: function (replyPageDTO) {
+                if (callback) {
                     callback(replyPageDTO.total, replyPageDTO.list);
                 }
             }
