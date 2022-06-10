@@ -8,6 +8,7 @@ import java.util.List;
 
 @Service
 public interface BoardService {
+
     public void register(BoardVO boardVO);
 
     public BoardVO read(Long boardBno);

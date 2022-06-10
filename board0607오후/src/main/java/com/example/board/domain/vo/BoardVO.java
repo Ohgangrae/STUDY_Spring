@@ -3,6 +3,8 @@ package com.example.board.domain.vo;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @Data
 public class BoardVO {
@@ -12,4 +14,8 @@ public class BoardVO {
     private String boardWriter;
     private String boardRegisterDate;
     private String boardUpdateDate;
+
+//    input태그의 name에
+//    fileList[i]
+    private List<FileVO> filelist;
 }
